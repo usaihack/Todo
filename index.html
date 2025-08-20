@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+<body>
+    <!-- main start -->
+    <div class="main">
+        <div class="container">
+        <div class="input">
+            <input id="titleInput" type="text" placeholder="Enter the title of the task">
+        </div>
+
+        <div class="buttons">
+            <button id="addbtn">Add Task</button>
+            <button id="viewbtn">View Tasks</button>
+        </div>
+    </div>
+    <!-- main end -->
+
+    <!-- tasks section start -->
+    <div class="tasksSection"></div>
+    </div>
+    <!-- tasks section end -->
+
+    <!-- alert -->
+     <div class="alert">
+        <div class="alertP">
+            <p id="alertText">Task added Successfully 🎉</p>
+            <button id="resetbtn">OK</button>
+        </div>
+    </div>
+    <!-- alert end -->
+
+    <!-- popup -->
+    <div class="popup">
+        <p>Are You Sure to Delete this Task?</p>
+
+        <div class="popupButtons">
+            <button id="popupYes">Yes</button>
+            <button id="popupNo">Cancel</button>
+        </div>
+    </div>
+    <!-- popup end -->
+    <script src="script.js"></script>
+</body>
+</html>

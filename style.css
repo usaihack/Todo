@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
   max-width: 100vw;
   height: 100vh;
-  background-color: #f4f6fa;
+  background-color: rgb(34, 34, 34);
 }
 
 .main{
@@ -23,67 +23,119 @@ body {
 
 .container{
     height: auto;
-    min-height: 25%;
+    min-height: 50%;
     width: 50%;
-    margin-top: 20px;
-    border-radius: 5px;
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 2px 2px 5px rgb(164, 164, 164);
+    margin-top: 40px;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #0e0e0e;
+    box-shadow: 5px 5px 15px rgb(65, 65, 65);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
 }
 
 .input{
-    height: 50%;
+    height: 18%;
     width: 100%;
 }
 
 .input input{
     height: 100%;
     width: 100%;
-    border: 1px solid rgb(213, 213, 213);
+    border: 1px solid rgb(52, 52, 52);
     border-radius: 50px;
     background-color: rgb(242, 242, 242);
     outline: none;
-    padding: 10px;
+    padding: 20px;
     font-size: 20px;
-    transition: all ease 0.2s;
-    box-shadow: 2px 2px 5px rgb(212, 212, 212);
+    transition: all ease 0.5s;
+    box-shadow: 3px 3px 10px rgb(49, 49, 49);
+    background-color: rgb(29, 29, 29);
+    color: #f7f7f7;
 }
 
 .input input:focus{
-    background-color: white;
+    background-color: #000000;
 }
 
-.buttons{
+.timeDate{
+    height: 35%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.para{
     height: 50%;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    gap: 40%;
+}
+
+.dueDateSelect, .dueTimeSelect{
+    height: 100%;
+    width: 50%;
+    color: rgb(177, 177, 177);
+    font-size: 1.2em;
+    text-shadow: 2px 2px 10px rgb(144, 144, 144);
+}
+.subTimeDiv{
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
+}
+.timeDateDivs{
+    height: 100%;
+    width: 30%;
+    border-radius: 5px;
+}
+.timeDateDivs input{
+    height: 100%;
+    width: 100%;
+    background-color: #0e0e0e;
+    color: rgb(179, 179, 179);
+    text-decoration-color: white;
+    border: 2px solid rgb(70, 70, 70);
+    outline: none;
+    box-shadow: 2px 2px 5px rgb(89, 89, 89);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+}
+input[type="date"]::-webkit-calendar-picker-indicator, input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(98%) sepia(980%) saturate(100%) hue-rotate(200deg);
+  cursor: pointer;
+}
+
+.buttons{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .buttons button{
-    height: 80%;
+    height: 100%;
     width: 30%;
     cursor: pointer;
-    background-color: rgb(244, 244, 244);
-    border: 1px solid rgb(236, 236, 236);
-    font-size: 16px;
-    color: rgb(92, 92, 92);
+    background-color: rgb(29, 29, 29);
+    border: 1px solid rgb(80, 80, 80);
+    font-size: 1.2em;
+    color: rgb(171, 171, 171);
     border-radius: 5px;
     transition: all ease 0.5s;
-    box-shadow: 2px 2px 5px rgb(212, 212, 212);
+    box-shadow: 2px 2px 10px rgb(93, 93, 93);
 }
 
 .buttons button:hover{
-    background-color: rgb(230, 230, 230);
-    color: rgb(40, 40, 40);
+    background-color: rgb(0, 0, 0);
+    color: rgb(222, 222, 222);
 }
 
 
@@ -98,24 +150,34 @@ body {
     height: 180px;
     width: 100%;
     margin-top: 50px;
-    background-color: #e3f6f5;
+    background-color: rgb(15, 15, 15);
     border-radius: 5px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     transition: all ease 2s;
-    box-shadow: 2px 2px 5px rgb(220, 220, 220);
+    box-shadow: 2px 2px 10px rgb(65,65,65);
+    color: rgb(232, 232, 232);
+    position: relative;
 }
 
 .title{
     height: 40%;
-    width: auto;
+    width: 60%;
+    overflow: auto;
     font-size: 2em;
     font-weight: 600;
     padding: 5px;
 }
 
+.dueTime{
+    height: 30%;
+    width: 30%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 .status{
     height: 30%;
     width: auto;
@@ -133,26 +195,19 @@ body {
 .subButtons button{
     height: 100%;
     width: 30%;
-    background-color: rgb(244, 244, 244);
+    background-color: rgb(29, 29, 29);
+    border: 1px solid rgb(80, 80, 80);
     cursor: pointer;
     outline: none;
-    border: 1px solid rgb(239, 238, 238);
     border-radius: 5px;
     font-size: 16px;
-    color: rgb(69, 69, 69);
+    color: rgb(155, 155, 155);
     transition: all ease 0.5s;
-    box-shadow: 2px 2px 5px rgb(222, 222, 222);
+    box-shadow: 2px 2px 5px rgb(84, 84, 84);
 }
-.mark:hover{
-    background-color: rgba(180, 251, 158, 0.815);
-    border: 1px solid rgb(150, 255, 119);
-    color: black;
-}
-
-.delete:hover{
-    background-color: rgb(255, 170, 170);
-    border: 1px solid rgb(255, 170, 170);
-    color: black;
+.subButtons button:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(245, 245, 245);
 }
 
 
@@ -166,7 +221,9 @@ body {
     padding: 10px;
     text-align: center;
     transition: all ease 0.5s;
-    box-shadow: 2px 2px 5px rgb(215, 215, 215)
+    box-shadow: 2px 2px 5px rgb(59, 59, 59);
+    background-color: #000000;
+    color: rgb(235, 235, 235);
 }
 
 .alertP{
@@ -187,10 +244,10 @@ body {
     width: 25%;
     margin-top: 10px;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(209, 209, 209);
+    background-color: rgb(33, 33, 33);
+    border: 2px solid rgb(58, 58, 58);
     outline: none;
-    box-shadow: 2px 2px 5px rgb(106, 106, 106);
+    box-shadow: 2px 2px 5px rgb(75, 75, 75);
     border-radius: 5px;
     font-size: 1em;
     color: rgb(130, 130, 130);
@@ -198,8 +255,8 @@ body {
 }
 
 #resetbtn:hover{
-    background-color: rgb(237, 237, 237);
-    color: black;
+    background-color: rgb(0, 0, 0);
+    color: rgb(254, 254, 254);
 
 }
 
@@ -213,13 +270,14 @@ body {
     width: 30%;
     padding: 20px;
     border-radius: 5px;
-    background-color: bisque;
+    background-color: black;
     transform: scale(0);
-    position: absolute;
+    position: fixed;
     top: 40%;
     left: 35%;
     transition: all ease 0.5s;
-    box-shadow: 2px 2px 5px rgb(215, 215, 215);
+    box-shadow: 2px 2px 5px rgb(62, 62, 62);
+    color: #e2e2e2;
 }
 
 .popup p{
@@ -238,25 +296,18 @@ body {
 .popupButtons button{
     height: 100%;
     width: 20%;
-    background-color: rgb(250, 250, 250);
-    border: 1px solid rgb(233, 233, 233);
+    background-color: rgb(30, 30, 30);
+    border: 2px solid rgb(65, 65, 65);
+    box-shadow: 2px 2px 5px rgb(51, 51, 51);
     outline: none;
     border-radius: 5px;
     cursor: pointer;
     transition: all ease 0.5s;
     font-size: 16px;
     padding: 5px;
-    color: rgb(58, 58, 58);
+    color: rgb(203, 203, 203);
 }
 .popupButtons button:hover{
-    background-color: rgb(245, 245, 245);
-    color: black;
-}
-
-#popupYes:hover{
-    background-color: rgb(255, 170, 170);
-}
-
-#popupNo:hover{
-    background-color: rgba(190, 255, 170, 0.711);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }

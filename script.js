@@ -10,7 +10,10 @@ let popup = document.querySelector('.popup')
 let popupYes = document.getElementById('popupYes')
 let popupNo = document.getElementById('popupNo')
 
-let tasks = []
+let tasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+let dateInput = document.querySelector('.dateInput')
+let timeInput = document.querySelector('.timeInput')
 
 
 addbtn.addEventListener('click', () => {
@@ -18,24 +21,35 @@ addbtn.addEventListener('click', () => {
     let foundTask = tasks.find(task => task.name === titleString)
 
     if(foundTask){
-        alert.style.backgroundColor = 'rgb(255, 170, 170)'
         alertText.textContent = `Task "${titleInput.value}" already exists ⚠. Click View Tasks button to view all tasks.`
         titleInput.value = ''
         main.classList.add('blur')
-        alert.style.top = '-1px'
+        alert.style.top = '15px'
     }else if(!titleInput.value.trim()){
-        alert.style.backgroundColor = 'rgb(255, 170, 170)'
         alertText.textContent = 'Title must not be Empty or Space Only! ⚠'
         titleInput.value = ''
         main.classList.add('blur')
-        alert.style.top = '-1px'
-    }else{
-        tasks.push({name: titleInput.value.toUpperCase(), status: 'Incomplete ✖'})
-        alert.style.backgroundColor = 'rgba(174, 255, 174, 0.46)'
-        alertText.textContent = 'Task added successfully 🎉. Click View Tasks button to view all tasks.'
-        titleInput.value = ''
+        alert.style.top = '15px'
+    }else if(!dateInput.value || !timeInput.value){
+        alertText.textContent = `Please Select both date and time ⚠`
         main.classList.add('blur')
-        alert.style.top = '-1px'
+        alert.style.top = '15px'
+    }else{
+        let taskDueTime = new Date(dateInput.value + 'T' + timeInput.value)
+        tasks.push(
+            {
+            name: titleInput.value.toUpperCase(), 
+            status: 'Upcoming ⏰, Incomplete', 
+            time: taskDueTime.toISOString()
+        }
+    )   
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        alertText.textContent = 'Task saved successfully 🎉. Click View Tasks button to view all tasks.'
+        titleInput.value = ''
+        dateInput.value = ''
+        timeInput.value = ''
+        main.classList.add('blur')
+        alert.style.top = '15px'
     }
 })
 
@@ -45,12 +59,13 @@ ok.addEventListener('click', () => {
     alert.style.top = '-50%'
 })
 
-
 viewbtn.addEventListener('click', () => {
     let tasksSection = document.querySelector('.tasksSection')
     tasksSection.innerHTML = ''
 
     tasks.forEach((task, index) => {
+        let taskStatus = getStatus(task)
+
         let taskDiv = document.createElement('div')
         taskDiv.className = 'task'
 
@@ -59,9 +74,14 @@ viewbtn.addEventListener('click', () => {
         titleDiv.textContent = task.name
         taskDiv.appendChild(titleDiv)
 
+        let dueTime = document.createElement('div')
+        dueTime.className = 'dueTime'
+        dueTime.textContent = new Date(task.time).toLocaleString()
+        taskDiv.appendChild(dueTime)
+
         let statusDiv = document.createElement('div')
         statusDiv.className = 'status'
-        statusDiv.textContent = task.status
+        statusDiv.textContent = taskStatus
         taskDiv.appendChild(statusDiv)
 
         let subButtonsDiv = document.createElement('div')
@@ -75,6 +95,7 @@ viewbtn.addEventListener('click', () => {
         markComplete.addEventListener('click', () => {
             task.status = 'Completed ✔'
             statusDiv.textContent = 'Completed ✔'
+            localStorage.setItem('tasks', JSON.stringify(tasks))
         })
 
         let deleteTask = document.createElement('button')
@@ -91,6 +112,7 @@ viewbtn.addEventListener('click', () => {
                 popup.style.transform = 'scale(0)'
                 main.classList.remove('blur')
                 tasks.splice(index, 1)
+                localStorage.setItem('tasks', JSON.stringify(tasks))
 
             })
             popupNo.addEventListener('click', () => {
@@ -103,4 +125,32 @@ viewbtn.addEventListener('click', () => {
         taskDiv.appendChild(subButtonsDiv)
         tasksSection.appendChild(taskDiv)
     })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
 })
+
+
+// function for comparing time
+function getStatus(task){
+    let currentTime = new Date()
+    let taskDueTime = new Date(task.time)
+
+    if(task.status === 'Completed ✔'){
+        return 'Completed ✔'
+    }else if(currentTime > taskDueTime){
+        task.status = 'Expired 💀'
+
+        return 'Expired 💀'
+    }else if(
+        currentTime.toDateString() === taskDueTime.toDateString() &&
+        currentTime.getHours() === taskDueTime.getHours() &&
+        currentTime.getMinutes() === taskDueTime.getMinutes()
+    ){
+        task.status = 'Now 🔔'
+        return 'Now 🔔'
+    }else{
+        task.status = 'Upcoming ⏰, Incomplete'
+        return 'Upcoming ⏰, Incomplete'
+    }
+
+}
